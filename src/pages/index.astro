@@ -10,7 +10,7 @@ const posts = (await getCollection('blog')).sort(
 
 const highlightedPosts = posts.slice(0, 3);
 ---
-<App title={SITE_TITLE} description={SITE_DESCRIPTION} pubDate={new Date("2024-09-22")}>
+<App title={SITE_TITLE} description={SITE_DESCRIPTION} pubDate={new Date()}>
 	<main>
 		<section>
 			{highlightedPosts.map(post => {
