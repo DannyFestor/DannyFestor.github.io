@@ -1,0 +1,34 @@
+---
+import App from '@layouts/App.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
+import { getCollection } from 'astro:content';
+
+import { formatDate } from '@scripts/formatDate';
+import { getTags } from '@scripts/getTags';
+import TagList from '@components/Blog/TagList.astro';
+import PostList from '@components/Blog/PostList.astro';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    const tags = getTags(posts);
+
+    return tags.map((tag) => {
+        const filteredPosts = posts.filter((post) => post.data.tags?.includes(tag));
+
+        return {
+            params: { tag: tag },
+            props: { tags: tags, tag: tag, posts: filteredPosts },
+        };
+    });
+}
+
+const posts = Astro.props.posts;
+const tag = Astro.props.tag;
+const tags = Astro.props.tags;
+---
+
+<App title={SITE_TITLE} description={SITE_DESCRIPTION} pubDate={new Date()}>
+    <TagList tags={tags} tag={tag} />
+
+    <PostList posts={posts} />
+</App>

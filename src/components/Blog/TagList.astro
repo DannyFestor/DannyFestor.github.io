@@ -1,0 +1,61 @@
+---
+interface Props {
+    tags: string[];
+    tag?: string;
+}
+
+import { COLORMAP } from '../../consts';
+
+const { tags, tag: selectedTag } = Astro.props;
+---
+
+<section id="tag-list">
+    {
+        selectedTag ? (
+            <a
+                href="/blog"
+                id="selected"
+                data-selected
+                style={
+                    '--tag-primary:' +
+                    (COLORMAP[selectedTag]?.bg ?? '#0F0') +
+                    ';--tag-secondary:' +
+                    (COLORMAP[selectedTag]?.fg ?? '#F0F')
+                }
+            >
+                {selectedTag}
+            </a>
+        ) : null
+    }
+    {
+        selectedTag
+            ? tags
+                  .filter((tag) => tag !== selectedTag)
+                  .map((tag) => (
+                      <a
+                          href={'/blog/tag/' + tag}
+                          style={
+                              '--tag-primary:' +
+                              (COLORMAP[tag]?.fg ?? '#0F0') +
+                              ';--tag-secondary:' +
+                              (COLORMAP[tag]?.bg ?? '#F0F')
+                          }
+                      >
+                          {tag}
+                      </a>
+                  ))
+            : tags.map((tag) => (
+                  <a
+                      href={'/blog/tag/' + tag}
+                      style={
+                          '--tag-primary:' +
+                          (COLORMAP[tag]?.fg ?? '#0F0') +
+                          ';--tag-secondary:' +
+                          (COLORMAP[tag]?.bg ?? '#F0F')
+                      }
+                  >
+                      {tag}
+                  </a>
+              ))
+    }
+</section>

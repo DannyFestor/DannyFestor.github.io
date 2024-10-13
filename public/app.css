@@ -48,8 +48,9 @@ h6 {
 
 body {
   line-height: 1.5;
+  padding: 4rem 1rem 1rem 1rem;
   -webkit-font-smoothing: antialiased;
-  font-size: 16pt;
+  font-size: 12pt;
   min-height: 100vh;
   color: var(--primary);
   display: flex;
@@ -59,13 +60,54 @@ body {
   font-family: "Bai Jamjuree", sans-serif;
 }
 
-.sans-serif {
+main {
+  display: grid;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+main section {
+  padding: 1rem;
+  background-color: hsla(0, 0%, 45.5%, 0.08);
+  width: 100%;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+main section#tag-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+main section#tag-list a {
+    border: 1px solid var(--tag-primary);
+    color: var(--tag-primary);
+    background-color: var(--tag-secondary);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+main section#tag-list a[data-selected] {
+    margin-right: 1.5rem;
+}
+
+.serif {
   font-family: "Besley", serif;
 }
 
-body.dark {
+html.dark body {
   background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='30' height='30' patternTransform='scale(1) rotate(5)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(205, 100%, 8%, 1)'/><path d='M3.25 10h13.5M10 3.25v13.5' transform='translate(5,0)' stroke-linecap='square' stroke-width='1' stroke='hsla(198, 61%, 82%, .1)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
   color: var(--primary-dark);
+}
+
+html.dark main section#tag-list a {
+    border: 1px solid var(--tag-secondary);
+    color: var(--tag-secondary);
+    background-color: var(--tag-primary);
 }
 
 a {
@@ -85,6 +127,14 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+nav #site-title {
+  display: none;
 }
 
 nav ul {
@@ -100,7 +150,7 @@ nav ul li {
 }
 
 nav ul li a {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   height: 100%;
   display: flex;
   align-items: center;
@@ -110,16 +160,21 @@ footer {
   margin-top: auto;
 }
 
-#darkmode-toggle {
+#darkmode-toggle-wrap {
   position: relative;
   width: 80px;
   height: 40px;
-  padding: 0 10px;
+  border: 2px solid var(--primary);
+  border-radius: 999px;
+}
+
+#darkmode-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid var(--primary);
-  border-radius: 999px;
+  width: 100%;
+  height: 100%;
+  padding: 0 10px;
 
   span {
     svg {
@@ -133,38 +188,169 @@ footer {
   display: none;
 }
 
-#darkmode-toggle #darkmode-toggle-indicator {
+#darkmode-toggle label {
+  position: relative;
+}
+
+#darkmode-toggle-wrap #darkmode-toggle-indicator {
   position: absolute;
+  pointer-events: none;
   width: 30px;
   height: 30px;
   border-radius: 100%;
+  top: 3px;
   left: 5px;
   border: 2px solid var(--primary);
   transition: all 0.3s;
 }
 
-body.dark #darkmode-toggle {
+html.dark #darkmode-toggle-wrap {
   border: 2px solid var(--primary-dark);
 }
 
-body.dark #darkmode-toggle #darkmode-toggle-indicator {
+html.dark #darkmode-toggle-wrap #darkmode-toggle-indicator {
   border: 2px solid var(--primary-dark);
   transform: translateX(36px);
 }
 
-main {
+#post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#post-list a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+#post-list a:not(:last-child) {
+  border-bottom: 1px solid var(--primary);
+}
+
+html.dark #post-list a:not(:last-child) {
+  border-bottom: 1px solid var(--primary-dark);
+}
+
+#post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-top: 2rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 1rem 1rem;
-  background-color: hsla(0, 0%, 100%, 0.05);
-  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+#post-form section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+#post-form input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary);
+  flex-grow: 1;
+}
+
+#post-list img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#post-list .date {
+  font-size: 1em;
+}
+
+#post-list .title-line {
+  display: flex;
+  flex-direction: column;
+}
+
+#post-list .title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+#highlighted-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 @media (min-width: 1024px) {
+  body {
+    padding: 2rem;
+  }
+
   main {
+    padding: 2rem;
     max-width: 62rem;
     margin-left: auto;
     margin-right: auto;
   }
+
+  nav ul li a {
+    padding: 0 1rem;
+  }
+
+  nav #site-title {
+    display: block;
+  }
+
+  #post-form section {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  #post-list .title-line {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  #post-list .title-line .title {
+    order: 1;
+  }
+
+  #post-list .title-line .date {
+    order: 2;
+  }
+
+  #highlighted-posts {
+    flex-direction: row;
+  }
+}
+
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html.dark .astro-code,
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.astro-code,
+.astro-code span {
+  white-space: pre;
 }

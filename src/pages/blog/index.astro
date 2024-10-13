@@ -1,19 +1,24 @@
 ---
-import App from "../../layouts/App.astro";
-import {SITE_TITLE, SITE_DESCRIPTION} from '../../consts';
-import {getCollection} from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import App from '@layouts/App.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, COLORMAP } from '@consts';
+import { getCollection } from 'astro:content';
+
+import { formatDate } from '@scripts/formatDate';
+import { getTags } from '@scripts/getTags';
+import TagList from '@components/Blog/TagList.astro';
+import PostList from '@components/Blog/PostList.astro';
 
 const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+console.log(COLORMAP);
+
+const tags = getTags(posts);
 ---
 
-<!doctype html>
 <App title={SITE_TITLE} description={SITE_DESCRIPTION} pubDate={new Date()}>
-    <main>
-        <section>
-            {JSON.stringify(posts)}
-        </section>
-    </main>
+    <TagList tags={tags} />
+
+    <PostList posts={posts} />
 </App>
