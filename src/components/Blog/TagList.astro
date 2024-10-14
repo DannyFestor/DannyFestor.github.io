@@ -11,51 +11,18 @@ const { tags, tag: selectedTag } = Astro.props;
 
 <section id="tag-list">
     {
-        selectedTag ? (
+        tags.map((tag) => (
             <a
-                href="/blog"
-                id="selected"
-                data-selected
+                href={'/blog/tag/' + tag}
                 style={
                     '--tag-primary:' +
-                    (COLORMAP[selectedTag]?.bg ?? '#0F0') +
+                    ((tag === selectedTag ? COLORMAP[tag]?.bg : COLORMAP[tag]?.fg) ?? '#0F0') +
                     ';--tag-secondary:' +
-                    (COLORMAP[selectedTag]?.fg ?? '#F0F')
+                    ((tag === selectedTag ? COLORMAP[tag]?.fg : COLORMAP[tag]?.bg) ?? '#F0F')
                 }
             >
-                {selectedTag}
+                {tag}
             </a>
-        ) : null
-    }
-    {
-        selectedTag
-            ? tags
-                  .filter((tag) => tag !== selectedTag)
-                  .map((tag) => (
-                      <a
-                          href={'/blog/tag/' + tag}
-                          style={
-                              '--tag-primary:' +
-                              (COLORMAP[tag]?.fg ?? '#0F0') +
-                              ';--tag-secondary:' +
-                              (COLORMAP[tag]?.bg ?? '#F0F')
-                          }
-                      >
-                          {tag}
-                      </a>
-                  ))
-            : tags.map((tag) => (
-                  <a
-                      href={'/blog/tag/' + tag}
-                      style={
-                          '--tag-primary:' +
-                          (COLORMAP[tag]?.fg ?? '#0F0') +
-                          ';--tag-secondary:' +
-                          (COLORMAP[tag]?.bg ?? '#F0F')
-                      }
-                  >
-                      {tag}
-                  </a>
-              ))
+        ))
     }
 </section>
