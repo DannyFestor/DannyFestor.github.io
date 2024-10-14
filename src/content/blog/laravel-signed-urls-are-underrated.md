@@ -2,7 +2,7 @@
 title: "Laravel's most underrated security feature - What actually is a signed url, and how do they work?"
 description: 'Signed URLs are an underrated security feature in Laravel. In this post we will explore where to use them, and how they work under the hood'
 pubDate: '2024-04-17'
-heroImage: '/blog-laravel-signed-urls.png'
+heroImage: './blog-laravel-signed-urls.png'
 tags:
   - Laravel
   - PHP

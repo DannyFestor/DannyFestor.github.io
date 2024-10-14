@@ -12,6 +12,8 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+
+import "../../assets/app.css";
 ---
 
 <!-- Global Metadata -->
@@ -52,5 +54,3 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
     href="https://fonts.bunny.net/css?family=bai-jamjuree:400,400i,700,700i|besley:400,400i,700,700i"
     rel="stylesheet"
 />
-<link rel="stylesheet" href="/app.css">
-<script defer src="/app.js"></script>

@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import App from '@layouts/App.astro';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
@@ -18,7 +19,9 @@ const { Content } = await post.render();
 <App title={post.data.title} description={post.data.description} pubDate={post.data.pubDate}>
     <section>
         <h1>{post.data.title}</h1>
-        <img src={post.data.heroImage} alt="">
+        { post.data.heroImage &&
+        <Image id="post-image" src={post.data.heroImage} alt={post.data.title} decoding="async" loading="lazy">
+            }
         <Content />
     </section>
 </App>

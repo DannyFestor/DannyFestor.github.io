@@ -2,7 +2,7 @@
 title: 'Laravel Websockets with Soketi'
 description: 'Websockets do not have to be hard. Laravel makes this very easy with the battle tested Soketi'
 pubDate: '2024-03-07'
-heroImage: '/blog-laravel-soketi.png'
+heroImage: './blog-laravel-soketi.png'
 tags:
   - Laravel
   - PHP

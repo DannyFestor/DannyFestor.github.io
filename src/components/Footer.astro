@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 const today = new Date();
 ---
 
@@ -8,13 +10,25 @@ const today = new Date();
     </section>
     <section class="social-links">
         <a href="https://github.com/dannyfestor" target="_blank">
-            <img src="/icon-github.svg" alt="Find my open source projects on Github">
-            <span class="sr-only">GitHub</span>
-        </a>
+            <Image
+                src="/icon-github.svg"
+                alt="Find my open source projects on Github"
+                height={48}
+                width={48}
+            >
+                <span class="sr-only">GitHub</span>
+            </Image>
 
-        <a href="https://pinkary.com/@danakin" target="_blank">
-            <img src="/icon-pinkary.svg" alt="Find all my socials on Pinkary">
-            <span class="sr-only">All my socials<br />on Pinkary.com</span>
+            <a href="https://pinkary.com/@danakin" target="_blank">
+                <Image
+                    src="/icon-pinkary.svg"
+                    alt="Find all my socials on Pinkary"
+                    height={48}
+                    width={48}
+                >
+                    <span class="sr-only">All my socials<br />on Pinkary.com</span>
+                </Image>
+            </a>
         </a>
     </section>
 </footer>
