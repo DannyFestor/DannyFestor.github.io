@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@consts";
 
 const posts = (await getCollection("blog")).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const highlightedPosts = posts.slice(0, 3);
