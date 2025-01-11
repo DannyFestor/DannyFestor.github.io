@@ -8,7 +8,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://DannyFestor.github.io",
+    site: "https://festor.info",
 	integrations: [mdx(), sitemap()],
 
 	markdown: {
