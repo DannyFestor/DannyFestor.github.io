@@ -1,9 +1,9 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { formatDate } from '@scripts/formatDate';
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "@scripts/formatDate";
 
 interface Props {
-    posts: CollectionEntry<"blog">[];
+	posts: CollectionEntry<"blog">[];
 }
 
 const { posts } = Astro.props;

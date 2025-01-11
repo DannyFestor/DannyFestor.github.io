@@ -1,24 +1,24 @@
 ---
-import App from '@layouts/App.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '@consts';
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@consts";
+import App from "@layouts/App.astro";
 
-import { getTags } from '@scripts/getTags';
-import TagList from '@components/Blog/TagList.astro';
-import PostList from '@components/Blog/PostList.astro';
+import PostList from "@components/Blog/PostList.astro";
+import TagList from "@components/Blog/TagList.astro";
+import { getTags } from "@scripts/getTags";
 
 export async function getStaticPaths() {
-    const posts = await getCollection('blog');
-    const tags = getTags(posts);
+	const posts = await getCollection("blog");
+	const tags = getTags(posts);
 
-    return tags.map((tag) => {
-        const filteredPosts = posts.filter((post) => post.data.tags?.includes(tag));
+	return tags.map((tag) => {
+		const filteredPosts = posts.filter((post) => post.data.tags?.includes(tag));
 
-        return {
-            params: { tag: tag },
-            props: { tags: tags, tag: tag, posts: filteredPosts },
-        };
-    });
+		return {
+			params: { tag: tag },
+			props: { tags: tags, tag: tag, posts: filteredPosts },
+		};
+	});
 }
 
 const posts = Astro.props.posts;

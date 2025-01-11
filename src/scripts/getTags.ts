@@ -1,14 +1,17 @@
-import type { CollectionEntry, AnyEntryMap } from "astro:content";
+import type { AnyEntryMap, CollectionEntry } from "astro:content";
 
 export const getTags = <T extends CollectionEntry<keyof AnyEntryMap>>(
-  data: T[],
+	_data: T[],
 ): string[] => {
-  const tags = new Set<string>();
+	const tags = new Set<string>();
 
-  data = data.filter((item) => item.data && item.data.tags);
+	const data = _data.filter((item) => item.data?.tags);
 
-  data.forEach((item) => {
-    item.data.tags!.forEach((tag) => tags.add(tag));
-  });
-  return Array.from(tags);
+	for (const item of data) {
+		for (const tag of item.data.tags as string[]) {
+			tags.add(tag);
+		}
+	}
+
+	return Array.from(tags);
 };
